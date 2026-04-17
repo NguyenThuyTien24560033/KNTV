@@ -99,7 +99,7 @@ const PartnerLogin = ({ onClose }) => {
 
       // chuyển trang
       setTimeout(() => {
-        navigate("/partner/dashboard");
+        navigate("/partner");
       }, 1000);
     } catch (err) {
       console.error("Login Error:", err);
@@ -108,6 +108,61 @@ const PartnerLogin = ({ onClose }) => {
       setLoading(false);
     }
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (loading) return;
+  //   setLoading(true);
+
+  //   try {
+  //     // 1. CHUYỂN SANG POST: Gửi email/pass trong body để bảo mật
+  //     const res = await fetch(`${API_BASE}/api/partner/login`, { // Thay endpoint thật ở đây
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ email, password }),
+  //       // 2. COOKIE: Cho phép trình duyệt nhận/gửi Cookie HttpOnly từ Backend
+  //       credentials: "include", 
+  //     });
+
+  //     const result = await res.json();
+
+  //     // 3. KIỂM TRA TRẠNG THÁI: Backend thật thường trả status 200/201 nếu OK
+  //     if (!res.ok) {
+  //       toast.error(result.message || "Incorrect email or password");
+  //       return;
+  //     }
+
+  //     // 4. CHECK ROLE: Đảm bảo user đăng nhập là partner
+  //     if (result.user.role !== "partner") {
+  //       toast.error("Access denied: Not a Partner account.");
+  //       return;
+  //     }
+
+  //     // 5. LƯU TOKEN THẬT: Không dùng "fake-partner-token" nữa
+  //     localStorage.setItem("token", result.token); 
+  //     localStorage.setItem("user", JSON.stringify(result.user));
+  //     localStorage.setItem("role", result.user.role);
+
+  //     toast.success("Login successful!");
+  //     window.dispatchEvent(new Event("userChanged"));
+
+  //     if (onClose) {
+  //       setTimeout(onClose, 800);
+  //     }
+
+  //     setTimeout(() => {
+  //       navigate("/partner/dashboard");
+  //     }, 1000);
+
+  //   } catch (err) {
+  //     console.error("Login Error:", err);
+  //     toast.error("Network error. Please try again.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <div className="login-overlay">

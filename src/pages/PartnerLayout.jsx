@@ -1,270 +1,139 @@
 
 
-import { useEffect, useState } from "react";
-import { Outlet, useNavigate, Navigate, useLocation } from "react-router-dom";
-import {
-  LayoutDashboard,
-  MapPin,
-  MenuSquare,
-  Percent,
-  Clock,
-  Bell,
-  User,
-  LogOut,
-  Star   // ← Thêm icon Star
-} from "lucide-react";
-import "./PartnerLayout.css";
-
-const PartnerLayout = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const [user, setUser] = useState(() => {
-    try {
-      const stored = localStorage.getItem("user");
-      return stored ? JSON.parse(stored) : null;
-    } catch {
-      return null;
-    }
-  });
-
-  const [role, setRole] = useState(localStorage.getItem("role"));
-
-  useEffect(() => {
-    const handleUserChange = () => {
-      const stored = localStorage.getItem("user");
-      setUser(stored ? JSON.parse(stored) : null);
-      setRole(localStorage.getItem("role"));
-    };
-
-    window.addEventListener("userChanged", handleUserChange);
-    return () => window.removeEventListener("userChanged", handleUserChange);
-  }, []);
-
-  if (!user || role !== "partner") {
-    return <Navigate to="/partner/login" replace />;
-  }
-
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    localStorage.removeItem("role");
-    window.dispatchEvent(new Event("userChanged"));
-    navigate("/");
-  };
-
-  // Navigate đến Profile
-  const goToProfile = () => {
-    navigate("/partner/profile");
-  };
-
-  const menuItems = [
-    {
-      path: "/partner/dashboard",
-      icon: <LayoutDashboard size={20} />,
-      label: "Dashboard"
-    },
-    {
-      path: "/partner/place",
-      icon: <MapPin size={20} />,
-      label: "My Place"
-    },
-    {
-      path: "/partner/menu",
-      icon: <MenuSquare size={20} />,
-      label: "Menu"
-    },
-    {
-      path: "/partner/discount",
-      icon: <Percent size={20} />,
-      label: "Discount"
-    },
-    {
-      path: "/partner/hours",
-      icon: <Clock size={20} />,
-      label: "Open Hours"
-    },
-    {
-      path: "/partner/notifications",
-      icon: <Bell size={20} />,
-      label: "Notifications"
-    },
-    // ==================== THÊM MỤC RATINGS ====================
-    {
-      path: "/partner/rating",
-      icon: <Star size={20} />,
-      label: "Ratings & Reviews"
-    }
-  ];
-
-  return (
-    <div className="partner-layout">
-      {/* Sidebar */}
-      <aside className="partner-sidebar">
-        <div className="sidebar-header">
-          <h2>Partner Portal</h2>
-          <p>Manage location</p>
-        </div>
-
-        <nav className="sidebar-nav">
-          {menuItems.map((item) => (
-            <button
-              key={item.path}
-              className={`nav-item ${
-                location.pathname === item.path ? "active" : ""
-              }`}
-              onClick={() => navigate(item.path)}
-            >
-              {item.icon}
-              <span>{item.label}</span>
-            </button>
-          ))}
-        </nav>
-
-        {/* User info */}
-        <div className="sidebar-footer">
-          <div 
-            className="user-info" 
-            onClick={goToProfile}
-            style={{ cursor: "pointer" }}
-            title="Click để xem Profile"
-          >
-            <div className="user-avatar">
-              <User size={24} />
-            </div>
-            <div className="user-details">
-              <p className="user-name">{user.name || user.email}</p>
-              <p className="user-role">Partner</p>
-            </div>
-          </div>
-
-          <button className="logout-btn" onClick={handleLogout}>
-            <LogOut size={18} />
-            <span>Log out</span>
-          </button>
-        </div>
-      </aside>
-
-      {/* Main Content */}
-      <div className="partner-main">
-        <header className="partner-top-header">
-          <h1>Welcome back, {user.name || "Partner"}!</h1>
-        </header>
-
-        <main className="partner-content">
-          <Outlet />
-        </main>
-      </div>
-    </div>
-  );
-};
-
-export default PartnerLayout;
-
-
-
-
-/**
- * PartnerLayout.jsx
- * -----------------
- * Layout chính cho Partner Portal.
- * - Quản lý sidebar với menu điều hướng (Dashboard, Place, Menu, Discount, Hours, Notifications, Ratings).
- * - Hiển thị thông tin user (partner) và cho phép logout.
- * - Bảo vệ route: nếu chưa login hoặc role không phải "partner" thì redirect về trang login.
- * - Dùng <Outlet /> để render nội dung con theo route hiện tại.
- */
-
-// import { useEffect, useState } from "react";
-// import { Outlet, useNavigate, Navigate, useLocation } from "react-router-dom";
-// import {
-//   LayoutDashboard,
-//   MapPin,
-//   MenuSquare,
-//   Percent,
-//   Clock,
-//   Bell,
-//   User,
-//   LogOut,
-//   Star   // Icon cho Ratings
+// import { useState, useEffect } from "react";
+// import { 
+//   LayoutDashboard, 
+//   UtensilsCrossed, 
+//   Clock, 
+//   Tag, 
+//   Bell, 
+//   Star, 
+//   LogOut, 
+//   Menu as MenuIcon,
+//   X 
 // } from "lucide-react";
+// import { useNavigate } from "react-router-dom";
+
+// // Import các Block Items
+// import PartnerDiscount from "./PartnerDiscount.jsx";
+// import PartnerFirst from "./PartnerFirst.jsx";
+// import PartnerHours from "./PartnerHour.jsx";
+// import PartnerMenu from "./PartnerMenu";
+// import PartnerRating from "./PartnerRating.jsx";
+// import PartnerNoti from "./PartnerNoti.jsx";
 // import "./PartnerLayout.css";
 
+// const API_BASE = "http://localhost:3001";
+
 // const PartnerLayout = () => {
-//   const navigate = useNavigate();     // Hook điều hướng
-//   const location = useLocation();     // Hook lấy path hiện tại
-
-//   // State user lấy từ localStorage
-//   const [user, setUser] = useState(() => {
-//     try {
-//       const stored = localStorage.getItem("user");
-//       return stored ? JSON.parse(stored) : null;
-//     } catch {
-//       return null;
-//     }
+//   const navigate = useNavigate();
+  
+//   // 1. STATE QUẢN LÝ TAB & UI
+//   const [activeTab, setActiveTab] = useState("dashboard");
+//   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  
+//   // 2. STATE DỮ LIỆU TẬP TRUNG
+//   const [fullData, setFullData] = useState({
+//     locations: [],
+//     menu: [],
+//     discounts: [],
+//     hours_record: null,
+//     notifications: [],
+//     reviews: []
 //   });
+//   const [loading, setLoading] = useState(true);
 
-//   // State role lấy từ localStorage
-//   const [role, setRole] = useState(localStorage.getItem("role"));
+//   // 3. HÀM FETCH DỮ LIỆU (Gọi 1 lần dùng cho tất cả)
+//   const fetchAllPartnerData = async () => {
+//     try {
+//       const user = JSON.parse(localStorage.getItem("user"));
+//       if (!user) {
+//         navigate("/partner/login");
+//         return;
+//       }
+//       const partnerId = String(user.id);
 
-//   // Lắng nghe sự kiện userChanged để cập nhật lại user/role khi login/logout
+//       // Bước 1: Lấy thông tin quán (Location)
+//       const locRes = await fetch(`${API_BASE}/locations?partnerId=${partnerId}`);
+//       const locations = await locRes.json();
+      
+//       if (locations.length > 0) {
+//         const pId = locations[0].id;
+
+//         // Bước 2: Fetch song song tất cả tài nguyên bằng Promise.all
+//         const [menuRes, discRes, hourRes, notiRes, reviewRes] = await Promise.all([
+//           fetch(`${API_BASE}/menu?placeId=${pId}`),
+//           fetch(`${API_BASE}/discounts?placeId=${pId}`),
+//           fetch(`${API_BASE}/hours?placeId=${pId}`),
+//           fetch(`${API_BASE}/notifications`),
+//           fetch(`${API_BASE}/comments?placeId=${pId}`)
+//         ]);
+
+//         const menu = await menuRes.json();
+//         const discounts = await discRes.json();
+//         const hoursData = await hourRes.json();
+//         const allNoti = await notiRes.json();
+//         const reviews = await reviewRes.json();
+
+//         // Bước 3: Lọc thông báo theo Partner
+//         const filteredNoti = allNoti
+//           .filter((n) => String(n.partnerId) === partnerId)
+//           .sort((a, b) => b.id - a.id);
+
+//         setFullData({
+//           locations,
+//           menu,
+//           discounts,
+//           hours_record: hoursData.length > 0 ? hoursData[0] : null,
+//           notifications: filteredNoti,
+//           reviews: reviews.sort((a, b) => b.id - a.id)
+//         });
+//       }
+//     } catch (error) {
+//       console.error("Layout Fetching Error:", error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
 //   useEffect(() => {
-//     const handleUserChange = () => {
-//       const stored = localStorage.getItem("user");
-//       setUser(stored ? JSON.parse(stored) : null);
-//       setRole(localStorage.getItem("role"));
-//     };
-
-//     window.addEventListener("userChanged", handleUserChange);
-//     return () => window.removeEventListener("userChanged", handleUserChange);
+//     fetchAllPartnerData();
 //   }, []);
 
-//   // Nếu chưa login hoặc role không phải partner → redirect về trang login
-//   if (!user || role !== "partner") {
-//     return <Navigate to="/partner/login" replace />;
-//   }
-
-//   // Hàm logout: xoá dữ liệu trong localStorage và điều hướng về trang chủ
 //   const handleLogout = () => {
 //     localStorage.removeItem("user");
-//     localStorage.removeItem("token");
-//     localStorage.removeItem("role");
-//     window.dispatchEvent(new Event("userChanged")); // phát sự kiện để update state
 //     navigate("/");
 //   };
 
-//   // Hàm điều hướng đến trang Profile
-//   const goToProfile = () => {
-//     navigate("/partner/profile");
-//   };
+//   if (loading) return <div className="layout-loading">Loading system data...</div>;
 
-//   // Danh sách menu sidebar
-//   const menuItems = [
-//     { path: "/partner/dashboard", icon: <LayoutDashboard size={20} />, label: "Dashboard" },
-//     { path: "/partner/place", icon: <MapPin size={20} />, label: "My Place" },
-//     { path: "/partner/menu", icon: <MenuSquare size={20} />, label: "Menu" },
-//     { path: "/partner/discount", icon: <Percent size={20} />, label: "Discount" },
-//     { path: "/partner/hours", icon: <Clock size={20} />, label: "Open Hours" },
-//     { path: "/partner/notifications", icon: <Bell size={20} />, label: "Notifications" },
-//     // Thêm mục Ratings
-//     { path: "/partner/rating", icon: <Star size={20} />, label: "Ratings & Reviews" }
+//   // Cấu hình Sidebar
+//   const sidebarItems = [
+//     { id: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={20} /> },
+//     { id: "menu", label: "Menu Management", icon: <UtensilsCrossed size={20} /> },
+//     { id: "hours", label: "Operating Hours", icon: <Clock size={20} /> },
+//     { id: "discount", label: "Promotions", icon: <Tag size={20} /> },
+//     { id: "notification", label: "Announcements", icon: <Bell size={20} /> },
+//     { id: "rating", label: "Customer Reviews", icon: <Star size={20} /> },
 //   ];
 
 //   return (
-//     <div className="partner-layout">
-//       {/* Sidebar */}
-//       <aside className="partner-sidebar">
+//     <div className="partner-layout-container">
+//       {/* SIDEBAR AREA */}
+//       <aside className={`partner-sidebar ${isSidebarOpen ? "open" : "closed"}`}>
 //         <div className="sidebar-header">
-//           <h2>Partner Portal</h2>
-//           <p>Manage location</p>
+//           <div className="logo-brand">PARTNER HUB</div>
+//           <button className="mobile-toggle" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+//             {isSidebarOpen ? <X size={18} /> : <MenuIcon size={18} />}
+//           </button>
 //         </div>
 
-//         {/* Menu điều hướng */}
 //         <nav className="sidebar-nav">
-//           {menuItems.map((item) => (
+//           {sidebarItems.map((item) => (
 //             <button
-//               key={item.path}
-//               className={`nav-item ${location.pathname === item.path ? "active" : ""}`}
-//               onClick={() => navigate(item.path)}
+//               key={item.id}
+//               className={`nav-item ${activeTab === item.id ? "active" : ""}`}
+//               onClick={() => setActiveTab(item.id)}
 //             >
 //               {item.icon}
 //               <span>{item.label}</span>
@@ -272,43 +141,281 @@ export default PartnerLayout;
 //           ))}
 //         </nav>
 
-//         {/* Thông tin user + nút logout */}
 //         <div className="sidebar-footer">
-//           <div 
-//             className="user-info" 
-//             onClick={goToProfile}
-//             style={{ cursor: "pointer" }}
-//             title="Click để xem Profile"
-//           >
-//             <div className="user-avatar">
-//               <User size={24} />
-//             </div>
-//             <div className="user-details">
-//               <p className="user-name">{user.name || user.email}</p>
-//               <p className="user-role">Partner</p>
-//             </div>
-//           </div>
-
 //           <button className="logout-btn" onClick={handleLogout}>
 //             <LogOut size={18} />
-//             <span>Log out</span>
+//             <span>Logout</span>
 //           </button>
 //         </div>
 //       </aside>
 
-//       {/* Main Content */}
-//       <div className="partner-main">
-//         <header className="partner-top-header">
-//           <h1>Welcome back, {user.name || "Partner"}!</h1>
+//       {/* CONTENT AREA */}
+//       <main className="partner-main-content">
+//         <header className="content-top-bar">
+//           <div className="header-info">
+//             <h2>{fullData.locations[0]?.name || "Partner Name"}</h2>
+//             <p>{fullData.locations[0]?.address}</p>
+//           </div>
 //         </header>
 
-//         <main className="partner-content">
-//           {/* Render nội dung con theo route */}
-//           <Outlet />
-//         </main>
-//       </div>
+//         <div className="scrollable-content">
+//           {/* LOGIC: CHỈ RENDER 1 ITEM DUY NHẤT KHỚP VỚI ACTIVETAB */}
+          
+//           {activeTab === "dashboard" && (
+//             <PartnerFirst data={fullData} onSwitchTab={(id) => setActiveTab(id)} />
+//           )}
+
+//           {activeTab === "menu" && (
+//             <PartnerMenu 
+//               data={fullData.menu} 
+//               placeId={fullData.locations[0]?.id} 
+//               onRefresh={fetchAllPartnerData} 
+//             />
+//           )}
+
+//           {activeTab === "hours" && (
+//             <PartnerHours 
+//               data={fullData.hours_record} 
+//               placeId={fullData.locations[0]?.id} 
+//               onRefresh={fetchAllPartnerData} 
+//             />
+//           )}
+
+//           {activeTab === "discount" && (
+//             <PartnerDiscount 
+//               data={fullData.discounts} 
+//               placeId={fullData.locations[0]?.id} 
+//               onRefresh={fetchAllPartnerData} 
+//             />
+//           )}
+
+//           {activeTab === "notification" && (
+//             <PartnerNoti 
+//               data={fullData.notifications} 
+//               onRefresh={fetchAllPartnerData} 
+//             />
+//           )}
+
+//           {activeTab === "rating" && (
+//             <PartnerRating 
+//               data={fullData.reviews} 
+//               onRefresh={fetchAllPartnerData} 
+//             />
+//           )}
+//         </div>
+//       </main>
 //     </div>
 //   );
 // };
 
 // export default PartnerLayout;
+
+
+
+import { useState, useEffect } from "react";
+import { 
+  LayoutDashboard, 
+  UtensilsCrossed, 
+  Clock, 
+  Tag, 
+  Bell, 
+  Star, 
+  LogOut, 
+  Menu as MenuIcon,
+  X,
+  User // Thêm icon User từ lucide-react
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+// Import các Block Items
+import PartnerDiscount from "./PartnerDiscount.jsx";
+import PartnerFirst from "./PartnerFirst.jsx";
+import PartnerHours from "./PartnerHour.jsx";
+import PartnerMenu from "./PartnerMenu";
+import PartnerRating from "./PartnerRating.jsx";
+import PartnerNoti from "./PartnerNoti.jsx";
+import PartnerProfile from "./PartnerProfile.jsx"; // 1. Import PartnerProfile
+import "./PartnerLayout.css";
+
+const API_BASE = "http://localhost:3001";
+
+const PartnerLayout = () => {
+  const navigate = useNavigate();
+  
+  const [activeTab, setActiveTab] = useState("dashboard");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  
+  const [fullData, setFullData] = useState({
+    locations: [],
+    menu: [],
+    discounts: [],
+    hours_record: null,
+    notifications: [],
+    reviews: []
+  });
+  const [loading, setLoading] = useState(true);
+
+  const fetchAllPartnerData = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user) {
+        navigate("/partner/login");
+        return;
+      }
+      const partnerId = String(user.id);
+
+      const locRes = await fetch(`${API_BASE}/locations?partnerId=${partnerId}`);
+      const locations = await locRes.json();
+      
+      if (locations.length > 0) {
+        const pId = locations[0].id;
+
+        const [menuRes, discRes, hourRes, notiRes, reviewRes] = await Promise.all([
+          fetch(`${API_BASE}/menu?placeId=${pId}`),
+          fetch(`${API_BASE}/discounts?placeId=${pId}`),
+          fetch(`${API_BASE}/hours?placeId=${pId}`),
+          fetch(`${API_BASE}/notifications`),
+          fetch(`${API_BASE}/comments?placeId=${pId}`)
+        ]);
+
+        const menu = await menuRes.json();
+        const discounts = await discRes.json();
+        const hoursData = await hourRes.json();
+        const allNoti = await notiRes.json();
+        const reviews = await reviewRes.json();
+
+        const filteredNoti = allNoti
+          .filter((n) => String(n.partnerId) === partnerId)
+          .sort((a, b) => b.id - a.id);
+
+        setFullData({
+          locations,
+          menu,
+          discounts,
+          hours_record: hoursData.length > 0 ? hoursData[0] : null,
+          notifications: filteredNoti,
+          reviews: reviews.sort((a, b) => b.id - a.id)
+        });
+      }
+    } catch (error) {
+      console.error("Layout Fetching Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllPartnerData();
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
+  if (loading) return <div className="layout-loading">Loading system data...</div>;
+
+  // 2. Thêm mục Profile vào sidebarItems
+  const sidebarItems = [
+    { id: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={20} /> },
+    { id: "menu", label: "Menu Management", icon: <UtensilsCrossed size={20} /> },
+    { id: "hours", label: "Operating Hours", icon: <Clock size={20} /> },
+    { id: "discount", label: "Promotions", icon: <Tag size={20} /> },
+    { id: "notification", label: "Announcements", icon: <Bell size={20} /> },
+    { id: "rating", label: "Customer Reviews", icon: <Star size={20} /> },
+    { id: "profile", label: "Profile", icon: <User size={20} /> }, // Thêm ở đây
+  ];
+
+  return (
+    <div className="partner-layout-container">
+      <aside className={`partner-sidebar ${isSidebarOpen ? "open" : "closed"}`}>
+        <div className="sidebar-header">
+          <div className="logo-brand">PARTNER HUB</div>
+          <button className="mobile-toggle" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+            {isSidebarOpen ? <X size={18} /> : <MenuIcon size={18} />}
+          </button>
+        </div>
+
+        <nav className="sidebar-nav">
+          {sidebarItems.map((item) => (
+            <button
+              key={item.id}
+              className={`nav-item ${activeTab === item.id ? "active" : ""}`}
+              onClick={() => setActiveTab(item.id)}
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </button>
+          ))}
+        </nav>
+
+        <div className="sidebar-footer">
+          <button className="logout-btn" onClick={handleLogout}>
+            <LogOut size={18} />
+            <span>Logout</span>
+          </button>
+        </div>
+      </aside>
+
+      <main className="partner-main-content">
+        <header className="content-top-bar">
+          <div className="header-info">
+            <h2>{fullData.locations[0]?.name || "Partner Name"}</h2>
+            <p>{fullData.locations[0]?.address}</p>
+          </div>
+        </header>
+
+        <div className="scrollable-content">
+          {activeTab === "dashboard" && (
+            <PartnerFirst data={fullData} onSwitchTab={(id) => setActiveTab(id)} />
+          )}
+
+          {activeTab === "menu" && (
+            <PartnerMenu 
+              data={fullData.menu} 
+              placeId={fullData.locations[0]?.id} 
+              onRefresh={fetchAllPartnerData} 
+            />
+          )}
+
+          {activeTab === "hours" && (
+            <PartnerHours 
+              data={fullData.hours_record} 
+              placeId={fullData.locations[0]?.id} 
+              onRefresh={fetchAllPartnerData} 
+            />
+          )}
+
+          {activeTab === "discount" && (
+            <PartnerDiscount 
+              data={fullData.discounts} 
+              placeId={fullData.locations[0]?.id} 
+              onRefresh={fetchAllPartnerData} 
+            />
+          )}
+
+          {activeTab === "notification" && (
+            <PartnerNoti 
+              data={fullData.notifications} 
+              onRefresh={fetchAllPartnerData} 
+            />
+          )}
+
+          {activeTab === "rating" && (
+            <PartnerRating 
+              data={fullData.reviews} 
+              onRefresh={fetchAllPartnerData} 
+            />
+          )}
+
+          {/* 3. LOGIC RENDER PROFILE */}
+          {activeTab === "profile" && (
+            <PartnerProfile />
+          )}
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default PartnerLayout;

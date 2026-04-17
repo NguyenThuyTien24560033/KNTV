@@ -110,6 +110,33 @@ const UserLogin = ({ onBack }) => {
     }
   };
 
+//   const loginUser = async () => {
+//   try {
+//     const res = await fetch("http://localhost:3001/api/login", { // Thay endpoint thật của Backend
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ email, password }),
+//       // Quan trọng: Để trình duyệt tự nhận và lưu Cookie nếu Backend trả về Set-Cookie
+//       credentials: "include", 
+//     });
+
+//     if (!res.ok) {
+//       const errorData = await res.json();
+//       toast.error(errorData.message || "Login failed");
+//       return null;
+//     }
+
+//     const data = await res.json();
+//     // data bây giờ thường sẽ có dạng: { token: "abc...", user: { id: 1, name: "..." } }
+//     return data; 
+//   } catch (err) {
+//     toast.error("Network error");
+//     return null;
+//   }
+// };
+
   // Hàm xử lý chính khi nhấn nút Submit form
   const handleSubmit = async (e) => {
     // Chặn load lại trang
@@ -162,6 +189,44 @@ const UserLogin = ({ onBack }) => {
       setLoading(false);
     }
   };
+
+//   const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   setLoading(true);
+
+//   if (!validate()) {
+//     setLoading(false);
+//     return;
+//   }
+
+//   try {
+//     if (isLogin) {
+//       const result = await loginUser();
+
+//       if (result) {
+//         // Lưu Token THẬT từ Backend trả về, không dùng "fake-token" nữa
+//         localStorage.setItem("token", result.token); 
+        
+//         // Lưu thông tin user
+//         localStorage.setItem("user", JSON.stringify(result.user));
+//         localStorage.setItem("role", result.user.role);
+//         localStorage.setItem("userId", result.user.id);
+
+//         window.dispatchEvent(new Event("userChanged"));
+//         toast.success("Login success!");
+//         navigate("/");
+//         if (onBack) onBack();
+//       }
+//     } else {
+//       // Logic register cũng nên đổi thành POST body thay vì query
+//       await registerUser();
+//     }
+//   } catch (err) {
+//     toast.error("Something went wrong");
+//   } finally {
+//     setLoading(false);
+//   }
+// };
 
   return (
     <div className="login-container">

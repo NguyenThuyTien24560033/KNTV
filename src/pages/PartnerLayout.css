@@ -1,203 +1,80 @@
-/* ==================== PARTNER LAYOUT ==================== */
-
-.partner-layout {
-  display: flex;
+/* Container bao ngoài cùng */
+.partner-layout-container {
+  display: flex; /* Kích hoạt flexbox để chia cột */
   min-height: 100vh;
+  width: 100%;
   background-color: #f8fafc;
+  overflow: hidden;
 }
 
-/* ==================== SIDEBAR ==================== */
-
+/* SIDEBAR (Cột trái - 1/4) */
 .partner-sidebar {
-  width: 280px;
+  flex: 0 0 25%; /* Chiếm đúng 25% chiều rộng (1/4) */
+  max-width: 300px; /* Giới hạn độ rộng tối đa để không quá to trên màn hình lớn */
+  min-width: 240px; /* Đảm bảo đủ chỗ cho chữ */
   background-color: #ffffff;
   border-right: 1px solid #e2e8f0;
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
-  position: fixed;
+  height: 100vh;
+  position: sticky; /* Giữ sidebar cố định khi cuộn content */
   top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
+  z-index: 50;
 }
 
-.sidebar-header {
-  padding: 24px 20px;
+/* MAIN CONTENT (Cột phải - 3/4) */
+.partner-main-content {
+  flex: 1; /* Tự động chiếm phần còn lại (3/4) */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto; /* Cho phép cuộn nội dung bên phải độc lập */
+}
+
+/* Header bên trong content */
+.content-top-bar {
+  padding: 20px 40px;
+  background-color: white;
   border-bottom: 1px solid #e2e8f0;
+  text-align: center; /* Để tên nhà hàng ra giữa như trong ảnh của Tiên */
 }
 
-.sidebar-header h2 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 700;
-  color: #1e2937;
-}
-
-.sidebar-header p {
-  margin: 4px 0 0 0;
-  color: #64748b;
-  font-size: 14px;
-}
-
-/* Navigation */
-.sidebar-nav {
+/* Vùng chứa các Item (Menu, Rating...) */
+.scrollable-content {
+  padding: 30px 40px;
   flex: 1;
-  padding: 12px 0;
-  overflow-y: auto;
 }
 
+/* CSS cho các nút nav trong Sidebar */
 .nav-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 24px;
-  color: #475569;
-  text-decoration: none;
+  padding: 12px 24px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
   font-size: 15px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.nav-item:hover {
-  background-color: #f1f5f9;
-  color: #1e40af;
+  text-align: left;
 }
 
 .nav-item.active {
   background-color: #eff6ff;
-  color: #1e40af;
-  border-left: 4px solid #3b82f6;
+  color: #2563eb;
+  border-right: 3px solid #2563eb;
   font-weight: 600;
 }
 
-.nav-item svg {
-  opacity: 0.85;
-}
-
-/* Sidebar Footer */
-.sidebar-footer {
-  padding: 20px;
-  border-top: 1px solid #e2e8f0;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  background-color: #f8fafc;
-}
-
-.user-avatar {
-  width: 42px;
-  height: 42px;
-  background-color: #e0f2fe;
-  color: #0ea5e9;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.user-details {
-  flex: 1;
-  overflow: hidden;
-}
-
-.user-name {
-  margin: 0;
-  font-weight: 600;
-  color: #1e2937;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.user-role {
-  margin: 2px 0 0 0;
-  font-size: 12px;
-  color: #64748b;
-}
-
-.logout-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px;
+.nav-item:hover:not(.active) {
   background-color: #f1f5f9;
-  color: #ef4444;
-  border: none;
-  border-radius: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 
-.logout-btn:hover {
-  background-color: #fee2e2;
-}
-
-/* ==================== MAIN CONTENT ==================== */
-
-.partner-main {
-  flex: 1;
-  margin-left: 280px; /* Khoảng cách bằng width của sidebar */
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.partner-top-header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
-  padding: 20px 32px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.partner-header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.partner-header-content h1 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 600;
-  color: #1e2937;
-}
-
-/* Content Area */
-.partner-content {
-  flex: 1;
-  padding: 32px;
-  background-color: #f8fafc;
-  overflow-y: auto;
-}
-
-/* Responsive */
+/* Mobile Responsive: Nếu màn hình quá nhỏ thì thu sidebar lại */
 @media (max-width: 1024px) {
   .partner-sidebar {
-    width: 240px;
-  }
-  .partner-main {
-    margin-left: 240px;
-  }
-}
-
-@media (max-width: 768px) {
-  .partner-sidebar {
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
-  
-  .partner-main {
-    margin-left: 0;
+    flex: 0 0 300px; /* Cố định độ rộng sidebar ở màn hình trung bình */
   }
 }

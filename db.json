@@ -263,6 +263,28 @@
       ],
       "created_at": "2026-04-15T19:21:33.663Z",
       "status": "pending"
+    },
+    {
+      "id": "b72d",
+      "title": "Trip to Vietnam",
+      "destination": "Vietnam",
+      "budget": 12345,
+      "num_people": 2,
+      "departure_date": "2026-04-17",
+      "return_date": "2026-04-18",
+      "location": "",
+      "area_id": 1,
+      "travel_style": [
+        2
+      ],
+      "food_type": [
+        4
+      ],
+      "accommodation_type": [
+        4
+      ],
+      "created_at": "2026-04-17T06:30:59.906Z",
+      "status": "pending"
     }
   ],
   "comments": [
@@ -288,7 +310,8 @@
       "userName": "Tiên",
       "rating": 5,
       "comment": "Đồ ăn ngon cực!",
-      "createdAt": "2026-04-16T12:00:00Z"
+      "createdAt": "2026-04-16T12:00:00Z",
+      "reply": "thuytien got it"
     },
     {
       "id": "c1",
@@ -442,6 +465,39 @@
       "placeId": 2,
       "partnerId": "5s",
       "createdAt": "2026-04-16T19:04:48.109Z"
+    },
+    {
+      "id": "7822",
+      "name": "Thành An",
+      "price": 234,
+      "description": "",
+      "category": "Family-style",
+      "image": "",
+      "placeId": "2",
+      "partnerId": "5s",
+      "createdAt": "2026-04-17T05:40:22.231Z"
+    },
+    {
+      "id": "5db4",
+      "name": "mực",
+      "price": 12345,
+      "description": "",
+      "category": "Set meals",
+      "image": "",
+      "placeId": 2,
+      "partnerId": "5s",
+      "createdAt": "2026-04-17T05:46:03.398Z"
+    },
+    {
+      "id": "2ce1",
+      "name": "coconut ",
+      "price": 15,
+      "description": "",
+      "category": "Street Food",
+      "image": "",
+      "placeId": 2,
+      "partnerId": "5s",
+      "createdAt": "2026-04-17T05:51:41.264Z"
     }
   ],
   "hours": [
@@ -574,17 +630,17 @@
           "day": "Monday",
           "openTime": "08:00",
           "closeTime": "23:00",
-          "isClosed": false
+          "isClosed": true
         },
         {
           "day": "Tuesday",
           "openTime": "08:00",
           "closeTime": "23:00",
-          "isClosed": false
+          "isClosed": true
         },
         {
           "day": "Wednesday",
-          "openTime": "08:00",
+          "openTime": "00:00",
           "closeTime": "23:00",
           "isClosed": false
         },
@@ -592,7 +648,7 @@
           "day": "Thursday",
           "openTime": "08:00",
           "closeTime": "23:00",
-          "isClosed": false
+          "isClosed": true
         },
         {
           "day": "Friday",
@@ -614,7 +670,7 @@
         }
       ],
       "isOpenToday": false,
-      "updatedAt": "2026-04-16T19:08:39.408Z"
+      "updatedAt": "2026-04-17T05:52:02.428Z"
     }
   ],
   "notifications": [
@@ -649,6 +705,28 @@
       "time": "02:11",
       "partnerId": "5s",
       "createdAt": "2026-04-16T19:09:52.359Z",
+      "isRead": false
+    },
+    {
+      "id": "3f24",
+      "title": "ẻtyui",
+      "message": "thutiennguyen",
+      "type": "info",
+      "date": "2026-04-23",
+      "time": "",
+      "partnerId": "5s",
+      "createdAt": "2026-04-17T05:44:10.184Z",
+      "isRead": false
+    },
+    {
+      "id": "0546",
+      "title": "heeeee",
+      "message": "ẻtyuio",
+      "type": "info",
+      "date": "2026-04-21",
+      "time": "",
+      "partnerId": "5s",
+      "createdAt": "2026-04-17T05:52:48.634Z",
       "isRead": false
     }
   ],
@@ -727,7 +805,7 @@
     },
     {
       "id": "80b2",
-      "title": "123456",
+      "title": "khai trương",
       "description": "",
       "discountPercent": "21",
       "startDate": "2026-04-18",
@@ -736,6 +814,18 @@
       "placeId": 2,
       "partnerId": "5s",
       "createdAt": "2026-04-16T19:06:58.525Z"
+    },
+    {
+      "id": "94eb",
+      "title": "6789",
+      "description": "",
+      "discountPercent": "43",
+      "startDate": "2026-04-17",
+      "endDate": "2026-04-19",
+      "code": "",
+      "placeId": 2,
+      "partnerId": "5s",
+      "createdAt": "2026-04-17T05:43:38.945Z"
     }
   ],
   "trips": [
