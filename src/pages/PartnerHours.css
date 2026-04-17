@@ -1,0 +1,207 @@
+.hours-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.hours-header {
+  margin-bottom: 32px;
+}
+
+.hours-header h1 {
+  font-size: 28px;
+  color: #1e2937;
+  margin-bottom: 8px;
+}
+
+.hours-header p {
+  color: #64748b;
+  font-size: 16px;
+}
+
+/* ==================== TODAY STATUS ==================== */
+
+.today-status {
+  margin-bottom: 40px;
+}
+
+.status-card {
+  background: white;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+  text-align: center;
+}
+
+.status-card h3 {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  color: #1e2937;
+}
+
+.status-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.toggle-on {
+  color: #22c55e;
+}
+
+.toggle-off {
+  color: #ef4444;
+}
+
+.status-text {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.status-text.open {
+  color: #22c55e;
+}
+
+.status-text.closed {
+  color: #ef4444;
+}
+
+.status-card small {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* ==================== SCHEDULE TABLE ==================== */
+
+.schedule-table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+  margin-bottom: 40px;
+}
+
+.schedule-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.schedule-table th {
+  background-color: #f8fafc;
+  padding: 18px 20px;
+  text-align: left;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.schedule-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+.day-name {
+  font-weight: 600;
+  color: #1e2937;
+  width: 140px;
+}
+
+.schedule-table input[type="time"] {
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 15px;
+  width: 140px;
+}
+
+.schedule-table input[type="time"]:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.closed-row {
+  background-color: #fef2f2;
+  opacity: 0.85;
+}
+
+.closed-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.closed-btn.open {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.closed-btn.closed {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.closed-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ==================== SAVE BUTTON ==================== */
+
+.save-section {
+  text-align: center;
+}
+
+.save-hours-btn {
+  padding: 16px 40px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 auto;
+  transition: all 0.2s;
+}
+
+.save-hours-btn:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px);
+}
+
+.save-hours-btn:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 100px 20px;
+  font-size: 18px;
+  color: #64748b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .schedule-table th,
+  .schedule-table td {
+    padding: 14px 12px;
+    font-size: 14px;
+  }
+
+  .schedule-table input[type="time"] {
+    width: 110px;
+  }
+}

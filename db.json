@@ -1,0 +1,764 @@
+{
+  "areas": [
+    {
+      "id": "1",
+      "name": "Đà Lạt"
+    },
+    {
+      "id": "2",
+      "name": "Nha Trang"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "tien",
+      "email": "tien@gmail.com",
+      "password": "123456@",
+      "role": "user",
+      "name": "Tiên"
+    },
+    {
+      "id": "6",
+      "username": "an",
+      "email": "an@gmail.com",
+      "password": "123456@",
+      "role": "partner",
+      "name": "Thanh An Travel",
+      "phoneNumber": "0987654321",
+      "address": "Hà Nội"
+    },
+    {
+      "id": "5s",
+      "username": "tan",
+      "email": "tan@gmail.com",
+      "password": "123456@",
+      "role": "partner",
+      "name": "Thanh An Travel",
+      "phoneNumber": "0987654321",
+      "address": "Hà Nội"
+    },
+    {
+      "id": "5af7",
+      "name": "Thanh",
+      "email": "thanh@gmail.com",
+      "password": "111111@",
+      "role": "user",
+      "phoneNumber": "0833441565"
+    },
+    {
+      "id": "f891",
+      "name": "Yến Nhi",
+      "email": "yennhi12@gmail.com",
+      "password": "123456@",
+      "role": "user"
+    }
+  ],
+  "locations": [
+    {
+      "id": "1",
+      "partnerId": "6",
+      "name": "Resort Biển Xanh Đà Nẵng",
+      "address": "25 Nguyễn Tất Thành, Sơn Trà, Đà Nẵng",
+      "phone": "0123456",
+      "description": "Resort 5 sao ven biển Mỹ Khê, hồ bơi vô cực, view đẹp, gần cầu Rồng.",
+      "image": "https://picsum.photos/id/1015/800/500",
+      "category": "Resort",
+      "city": "Đà Nẵng",
+      "rating": 4.7,
+      "createdAt": "2026-04-01T09:00:00Z"
+    },
+    {
+      "id": "2",
+      "partnerId": "5s",
+      "name": "Nhà hàng Hải Sản Nha Trang",
+      "address": "12 Trần Phú, Nha Trang",
+      "phone": "02583888888",
+      "description": "Chuyên hải sản tươi sống, thực đơn phong phú, không gian thoáng mát.",
+      "image": "https://picsum.photos/id/1025/800/500",
+      "category": "Restaurant",
+      "city": "Nha Trang",
+      "rating": 4.5,
+      "createdAt": "2026-03-28T10:00:00Z"
+    },
+    {
+      "id": "3",
+      "partnerId": "3",
+      "name": "Cafe Hoa Hồng Đà Lạt",
+      "address": "45 Phan Bội Châu, Đà Lạt",
+      "phone": "02633889999",
+      "description": "Quán cafe view thung lũng hoa, nổi tiếng với bánh ngọt homemade.",
+      "image": "https://picsum.photos/id/1035/800/500",
+      "category": "Cafe",
+      "city": "Đà Lạt",
+      "rating": 4.2,
+      "createdAt": "2026-04-02T08:30:00Z"
+    },
+    {
+      "id": "4",
+      "partnerId": "3",
+      "name": "Khách sạn Sông Hàn",
+      "address": "88 Bạch Đằng, Hải Châu, Đà Nẵng",
+      "phone": "02363927777",
+      "description": "Khách sạn 4 sao trung tâm thành phố, gần cầu quay Sông Hàn.",
+      "image": "https://picsum.photos/id/1045/800/500",
+      "category": "Hotel",
+      "city": "Đà Nẵng",
+      "rating": 4,
+      "createdAt": "2026-04-03T11:00:00Z"
+    },
+    {
+      "id": "5",
+      "partnerId": "3",
+      "name": "Quán Ăn Gia Đình",
+      "address": "23 Lê Lợi, Huế",
+      "phone": "02343887777",
+      "description": "Các món ăn truyền thống Huế, không gian ấm cúng.",
+      "image": "https://picsum.photos/id/1055/800/500",
+      "category": "Restaurant",
+      "city": "Huế",
+      "rating": 3.9,
+      "createdAt": "2026-04-04T12:00:00Z"
+    },
+    {
+      "id": "6",
+      "partnerId": "3",
+      "name": "Homestay Mộc Châu",
+      "address": "Bản Áng, Mộc Châu, Sơn La",
+      "phone": "02123886666",
+      "description": "Homestay phong cách nhà sàn, gần đồi chè.",
+      "image": "https://picsum.photos/id/1065/800/500",
+      "category": "Homestay",
+      "city": "Mộc Châu",
+      "rating": 4.3,
+      "createdAt": "2026-04-05T09:30:00Z"
+    },
+    {
+      "id": "7",
+      "partnerId": "3",
+      "name": "Spa Relax Hà Nội",
+      "address": "123 Kim Mã, Ba Đình, Hà Nội",
+      "phone": "02438887777",
+      "description": "Dịch vụ spa, massage chuyên nghiệp, không gian sang trọng.",
+      "image": "https://picsum.photos/id/1075/800/500",
+      "category": "Spa",
+      "city": "Hà Nội",
+      "rating": 4.6,
+      "createdAt": "2026-04-06T14:00:00Z"
+    },
+    {
+      "id": "8",
+      "partnerId": "3",
+      "name": "Bar SkyView",
+      "address": "Tầng 20, Vincom Center, TP.HCM",
+      "phone": "02838889999",
+      "description": "Bar rooftop view toàn cảnh thành phố, DJ quốc tế.",
+      "image": "https://picsum.photos/id/1085/800/500",
+      "category": "Bar",
+      "city": "TP.HCM",
+      "rating": 4.8,
+      "createdAt": "2026-04-07T20:00:00Z"
+    },
+    {
+      "id": "9",
+      "partnerId": "3",
+      "name": "Nhà hàng Chay Tịnh Tâm",
+      "address": "56 Nguyễn Huệ, TP.HCM",
+      "phone": "02837776666",
+      "description": "Thực đơn chay đa dạng, không gian yên tĩnh.",
+      "image": "https://picsum.photos/id/1095/800/500",
+      "category": "Vegetarian",
+      "city": "TP.HCM",
+      "rating": 4.4,
+      "createdAt": "2026-04-08T18:00:00Z"
+    },
+    {
+      "id": "10",
+      "partnerId": "3",
+      "name": "Khu du lịch Suối Tiên",
+      "address": "120 Xa Lộ Hà Nội, Quận 9, TP.HCM",
+      "phone": "02838885555",
+      "description": "Khu vui chơi giải trí, công viên nước, phù hợp gia đình.",
+      "image": "https://picsum.photos/id/1105/800/500",
+      "category": "Park",
+      "city": "TP.HCM",
+      "rating": 4.1,
+      "createdAt": "2026-04-09T09:00:00Z"
+    }
+  ],
+  "tripVersions": [
+    {
+      "id": "f9fb",
+      "title": "Test Trip Output",
+      "destination": "Đà Nẵng",
+      "budget": 5000000,
+      "num_people": 2,
+      "departure_date": "2026-04-20",
+      "return_date": "2026-04-25",
+      "location": "Đà Nẵng",
+      "area_id": 2,
+      "isFinal": true,
+      "created_at": "2026-04-15T10:00:00Z",
+      "status": "completed",
+      "days": [
+        {
+          "day": 1,
+          "activities": [
+            "Check-in khách sạn",
+            "Ăn tối tại nhà hàng hải sản"
+          ]
+        }
+      ],
+      "summary": {
+        "hotel": "Khách sạn Sông Hàn",
+        "mainActivity": "Tham quan Bà Nà Hills",
+        "payment": {
+          "food": 1500000,
+          "hotel": 2500000,
+          "other": 1000000,
+          "total": 5000000
+        }
+      }
+    },
+    {
+      "id": "898a",
+      "title": "Trip to Vietnam",
+      "destination": "Vietnam",
+      "budget": 34567,
+      "num_people": 2,
+      "departure_date": "2026-04-17",
+      "return_date": "2026-04-22",
+      "location": "",
+      "area_id": 1,
+      "travel_style": [
+        2
+      ],
+      "food_type": [
+        2
+      ],
+      "accommodation_type": [
+        4
+      ],
+      "created_at": "2026-04-15T19:19:38.487Z",
+      "status": "pending"
+    },
+    {
+      "id": "3764",
+      "title": "Trip to Vietnam",
+      "destination": "Vietnam",
+      "budget": 987654,
+      "num_people": 2,
+      "departure_date": "2026-04-17",
+      "return_date": "2026-04-19",
+      "location": "",
+      "area_id": 1,
+      "travel_style": [
+        2
+      ],
+      "food_type": [
+        3
+      ],
+      "accommodation_type": [
+        3
+      ],
+      "created_at": "2026-04-15T19:21:33.663Z",
+      "status": "pending"
+    }
+  ],
+  "comments": [
+    {
+      "id": "4704",
+      "locationId": "5s",
+      "name": "Thanh",
+      "rating": 4,
+      "content": "good",
+      "createdAt": "2026-04-09T12:44:23.092Z"
+    },
+    {
+      "id": "2a27",
+      "locationId": 1,
+      "name": "Yến Nhi",
+      "rating": 4,
+      "content": "qưer",
+      "createdAt": "2026-04-15T19:24:16.692Z"
+    },
+    {
+      "id": "r1",
+      "placeId": 2,
+      "userName": "Tiên",
+      "rating": 5,
+      "comment": "Đồ ăn ngon cực!",
+      "createdAt": "2026-04-16T12:00:00Z"
+    },
+    {
+      "id": "c1",
+      "placeId": 2,
+      "userName": "Tiên",
+      "rating": 5,
+      "comment": "Đồ ăn ngon cực!"
+    },
+    {
+      "id": "c2",
+      "placeId": 2,
+      "userName": "An",
+      "rating": 4,
+      "comment": "Ổn áp"
+    },
+    {
+      "id": "r2",
+      "placeId": 2,
+      "userName": "An",
+      "rating": 4,
+      "comment": "Ổn áp, sẽ quay lại",
+      "createdAt": "2026-04-16T13:00:00Z",
+      "reply": "cảm ơn"
+    }
+  ],
+  "menu": [
+    {
+      "id": "ca94",
+      "name": "Phở bò đặc biệt",
+      "price": "45000",
+      "placeId": "2",
+      "partnerId": "5s"
+    },
+    {
+      "id": "93c0",
+      "name": "cá",
+      "price": "123",
+      "description": "akl",
+      "category": "Seafood",
+      "image": "",
+      "placeId": "1",
+      "partnerId": "3",
+      "createdAt": "2026-04-15T19:33:31.189Z"
+    },
+    {
+      "id": "e89a",
+      "name": "cá",
+      "price": "123",
+      "description": "qưer",
+      "category": "Seafood",
+      "image": "",
+      "placeId": "1",
+      "partnerId": "3",
+      "createdAt": "2026-04-15T19:35:24.452Z"
+    },
+    {
+      "id": "c5de",
+      "name": "cá",
+      "price": "123",
+      "description": "Àdsghj",
+      "category": "Seafood",
+      "image": "",
+      "placeId": "2",
+      "partnerId": "5s",
+      "createdAt": "2026-04-16T18:11:05.604Z"
+    },
+    {
+      "id": "0074",
+      "name": "qưert",
+      "price": 1232,
+      "description": "ưdgf",
+      "category": "Vegetarian",
+      "image": "",
+      "placeId": "2",
+      "partnerId": "5s",
+      "createdAt": "2026-04-16T18:17:48.682Z"
+    },
+    {
+      "id": "240c",
+      "name": "1234",
+      "price": 2145,
+      "description": "ưefrgx",
+      "category": "Vegetarian",
+      "image": "",
+      "placeId": "2",
+      "partnerId": "5s",
+      "createdAt": "2026-04-16T18:20:46.632Z"
+    },
+    {
+      "id": "d24c",
+      "name": "Thành An",
+      "price": 1234,
+      "description": "ưefrgth",
+      "category": "Vegetarian",
+      "image": "",
+      "placeId": "2",
+      "partnerId": "5s",
+      "createdAt": "2026-04-16T18:33:04.573Z"
+    },
+    {
+      "id": "e16f",
+      "name": "la",
+      "price": 1234,
+      "description": "",
+      "category": "Vegetarian",
+      "image": "",
+      "placeId": "2",
+      "partnerId": "5s",
+      "createdAt": "2026-04-16T18:42:49.693Z"
+    },
+    {
+      "id": "0966",
+      "name": "tôm",
+      "price": 678,
+      "description": "",
+      "category": "Hotpot",
+      "image": "",
+      "placeId": 2,
+      "partnerId": "5s",
+      "createdAt": "2026-04-16T18:52:46.441Z"
+    },
+    {
+      "id": "8e21",
+      "name": "1234",
+      "price": 123456,
+      "description": "",
+      "category": "Seafood",
+      "image": "",
+      "placeId": "2",
+      "partnerId": "5s",
+      "createdAt": "2026-04-16T19:01:12.095Z"
+    },
+    {
+      "id": "97d8",
+      "name": "123456",
+      "price": 3456,
+      "description": "",
+      "category": "Meat",
+      "image": "",
+      "placeId": "2",
+      "partnerId": "5s",
+      "createdAt": "2026-04-16T19:02:31.329Z"
+    },
+    {
+      "id": "0458",
+      "name": "cá  chiên",
+      "price": 98,
+      "description": "",
+      "category": "Meat",
+      "image": "",
+      "placeId": 2,
+      "partnerId": "5s",
+      "createdAt": "2026-04-16T19:04:48.109Z"
+    }
+  ],
+  "hours": [
+    {
+      "id": "b7b6",
+      "placeId": "2",
+      "schedule": [
+        {
+          "day": "Monday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Tuesday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        }
+      ]
+    },
+    {
+      "id": "3205",
+      "placeId": "1",
+      "partnerId": "3",
+      "schedule": [
+        {
+          "day": "Monday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Tuesday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Wednesday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Thursday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Friday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Saturday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Sunday",
+          "openTime": "10:00",
+          "closeTime": "24:00",
+          "isClosed": false
+        }
+      ],
+      "isOpenToday": false,
+      "updatedAt": "2026-04-15T19:37:38.829Z"
+    },
+    {
+      "id": "13c6",
+      "placeId": "2",
+      "partnerId": "5s",
+      "schedule": [
+        {
+          "day": "Monday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Tuesday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Wednesday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Thursday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Friday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Saturday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Sunday",
+          "openTime": "10:00",
+          "closeTime": "24:00",
+          "isClosed": false
+        }
+      ],
+      "isOpenToday": false,
+      "updatedAt": "2026-04-16T18:48:02.597Z"
+    },
+    {
+      "id": "6433",
+      "placeId": 2,
+      "partnerId": "5s",
+      "schedule": [
+        {
+          "day": "Monday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Tuesday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Wednesday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Thursday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Friday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": false
+        },
+        {
+          "day": "Saturday",
+          "openTime": "08:00",
+          "closeTime": "23:00",
+          "isClosed": true
+        },
+        {
+          "day": "Sunday",
+          "openTime": "10:00",
+          "closeTime": "24:00",
+          "isClosed": false
+        }
+      ],
+      "isOpenToday": false,
+      "updatedAt": "2026-04-16T19:08:39.408Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "n1",
+      "partnerId": "5s",
+      "title": "Weekend Special",
+      "message": "Enjoy 20% off all seafood dishes this weekend!",
+      "type": "info",
+      "date": "2026-04-18",
+      "time": "18:00",
+      "createdAt": "2026-04-15T10:00:00Z",
+      "isRead": false
+    },
+    {
+      "id": "n2",
+      "partnerId": "3",
+      "title": "Holiday Notice",
+      "message": "Closed on April 30th for public holiday.",
+      "type": "warning",
+      "date": "2026-04-30",
+      "time": "00:00",
+      "createdAt": "2026-04-14T09:00:00Z",
+      "isRead": false
+    },
+    {
+      "id": "7a72",
+      "title": "12345",
+      "message": "qứdefg",
+      "type": "info",
+      "date": "2026-04-24",
+      "time": "02:11",
+      "partnerId": "5s",
+      "createdAt": "2026-04-16T19:09:52.359Z",
+      "isRead": false
+    }
+  ],
+  "discounts": [
+    {
+      "id": "d1",
+      "placeId": "2",
+      "partnerId": "3",
+      "title": "Summer Sale",
+      "description": "Get 15% off all menu items during summer.",
+      "discountPercent": 15,
+      "startDate": "2026-05-01",
+      "endDate": "2026-06-30",
+      "code": "SUMMER15",
+      "createdAt": "2026-04-10T12:00:00Z"
+    },
+    {
+      "id": "d2",
+      "placeId": "3",
+      "partnerId": "3",
+      "title": "Coffee Happy Hour",
+      "description": "Buy 1 get 1 free from 2pm to 5pm.",
+      "discountPercent": 50,
+      "startDate": "2026-04-20",
+      "endDate": "2026-05-20",
+      "code": "HAPPYCOFFEE",
+      "createdAt": "2026-04-12T15:00:00Z"
+    },
+    {
+      "id": "d0fe",
+      "title": "1234",
+      "description": "",
+      "discountPercent": "22",
+      "startDate": "2026-04-16",
+      "endDate": "2026-04-17",
+      "code": "",
+      "placeId": "1",
+      "partnerId": "3",
+      "createdAt": "2026-04-15T19:36:09.815Z"
+    },
+    {
+      "id": "97a6",
+      "title": "12345",
+      "description": "",
+      "discountPercent": "21",
+      "startDate": "2026-04-24",
+      "endDate": "2026-04-24",
+      "code": "",
+      "placeId": "1",
+      "partnerId": "3",
+      "createdAt": "2026-04-15T19:38:08.130Z"
+    },
+    {
+      "id": "15a1",
+      "title": "qưefd",
+      "description": "",
+      "discountPercent": "12",
+      "startDate": "2026-04-18",
+      "endDate": "2026-04-22",
+      "code": "",
+      "placeId": "1",
+      "partnerId": "3",
+      "createdAt": "2026-04-16T17:46:50.602Z"
+    },
+    {
+      "id": "83cd",
+      "title": "qừg",
+      "description": "",
+      "discountPercent": "12",
+      "startDate": "2026-04-18",
+      "endDate": "2026-04-24",
+      "code": "",
+      "placeId": "2",
+      "partnerId": "5s",
+      "createdAt": "2026-04-16T18:02:27.123Z"
+    },
+    {
+      "id": "80b2",
+      "title": "123456",
+      "description": "",
+      "discountPercent": "21",
+      "startDate": "2026-04-18",
+      "endDate": "2026-04-22",
+      "code": "",
+      "placeId": 2,
+      "partnerId": "5s",
+      "createdAt": "2026-04-16T19:06:58.525Z"
+    }
+  ],
+  "trips": [
+    {
+      "id": "ff09",
+      "title": "Trip to Vietnam",
+      "destination": "Vietnam",
+      "budget": 12345678,
+      "num_people": 4,
+      "created_at": "2026-04-09T13:30:31.296Z",
+      "isSaved": true,
+      "status": "completed"
+    },
+    {
+      "id": "ff10",
+      "title": "Family Trip to Nha Trang",
+      "destination": "Nha Trang",
+      "budget": 8000000,
+      "num_people": 3,
+      "created_at": "2026-04-12T08:00:00Z",
+      "isSaved": true,
+      "status": "pending"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
