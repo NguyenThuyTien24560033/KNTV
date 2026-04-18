@@ -197,7 +197,7 @@ import { Star, MessageCircle, ArrowLeft } from "lucide-react";
 import UserFeedBack from "./UserFeedBack";
 import "./LocationDetail.css";
 
-const API = "http://localhost:3001";
+
 
 const LocationDetail = () => {
   const { id } = useParams();
@@ -214,13 +214,13 @@ const LocationDetail = () => {
     const fetchData = async () => {
       try {
         // Lấy thông tin địa điểm
-        const locRes = await fetch(`${API}/locations/${id}`);
+        const locRes = await fetch(`${import.meta.env.VITE_Location}${id}`);
         if (!locRes.ok) throw new Error("Location not found");
         const locData = await locRes.json();
         setLocation(locData);
 
         // Lấy danh sách đánh giá
-        const commentRes = await fetch(`${API}/comments?locationId=${id}`);
+        const commentRes = await fetch(`${import.meta.env.VITE_Location_Comment}?locationId=${id}`);
         if (commentRes.ok) {
           const commentData = await commentRes.json();
           setComments(Array.isArray(commentData) ? commentData : []);
@@ -243,7 +243,7 @@ const LocationDetail = () => {
 
   // Callback khi user gửi review thành công → refresh comments
   const handleReviewSubmitted = () => {
-    fetch(`${API}/comments?locationId=${id}`)
+    fetch(`${import.meta.env.VITE_Location_Comment}?locationId=${id}`)
       .then(res => res.ok ? res.json() : [])
       .then(data => setComments(Array.isArray(data) ? data : []));
   };

@@ -24,8 +24,6 @@ const UserLogin = ({ onBack }) => {
 
   const navigate = useNavigate();
 
-  // API
-  const API = "http://localhost:8000/travel";
 
   // Hàm kiểm tra dữ liệu đầu vào trước khi gửi đi
   const validate = () => {
@@ -53,7 +51,7 @@ const UserLogin = ({ onBack }) => {
   //REGISTER
   const registerUser = async () => {
     try {
-      const res = await fetch(`${API}/users/`, { // Thay bằng endpoint thật
+      const res = await fetch(import.meta.env.VITE_Register, { // Thay bằng endpoint thật
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -85,13 +83,19 @@ const UserLogin = ({ onBack }) => {
   // LOGIN 
   const loginUser = async () => {
     try {
-      const res = await fetch(`${API}/api/login/`, { // Thay bằng endpoint thật
-        method: "POST", // BẮT BUỘC dùng POST
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-        // credentials: "include" là để trình duyệt tự lưu Cookie HttpOnly nếu Backend có gửi kèm
-        credentials: "include", 
-      });
+      // Tiên
+      const res = await fetch(
+        `${API}?email=${email}&password=${password}`
+      );
+
+      // Khang
+      // const res = await fetch(import.meta.env.VITE_Login, { // Thay bằng endpoint thật
+      //   method: "POST", // BẮT BUỘC dùng POST
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ email, password }),
+      //   // credentials: "include" là để trình duyệt tự lưu Cookie HttpOnly nếu Backend có gửi kèm
+      //   credentials: "include", 
+      // });
 
       const data = await res.json();
 

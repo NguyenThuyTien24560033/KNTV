@@ -6,7 +6,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Star, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 import "./LocationPage.css";
 
-const API_BASE = "http://localhost:3001";
+// const API_BASE = "http://localhost:3001";
 
 const LocationPage = () => {
   const [locations, setLocations] = useState([]);
@@ -24,8 +24,8 @@ const LocationPage = () => {
       setLoading(true);
       try {
         const [locRes, comRes] = await Promise.all([
-          fetch(`${API_BASE}/locations`),
-          fetch(`${API_BASE}/comments`),
+          fetch(import.meta.env.VITE_Location_Random),
+          fetch(import.meta.env.VITE_Location_Comment),
         ]);
         const locData = await locRes.json();
         const comData = await comRes.json();

@@ -1,0 +1,24 @@
+VITE_API_Frontend=http://localhost:3001/
+VITE_API_Backend=http://localhost:8000/travel/
+
+# Cấu trúc lấy giá trị: import.meta.env.VITE_Login
+
+
+HistoryPage.jsx
+VITE_HISTORY=http://localhost:3001/tripVersions/
+
+
+HomePage.jsx
+VITE_Location_Recommend=http://localhost:3001/locations/
+
+
+LocationDetail.jsx
+VITE_Location=http://localhost:3001/locations/
+VITE_Location_Comment=http://localhost:3001/comments/
+
+
+
+
+UserLogin.jsx
+VITE_Register=http://localhost:8000/travel/users/
+VITE_Login=http://localhost:8000/travel/api/login/

@@ -168,7 +168,6 @@ import { Edit2, Trash2, Check, Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./HistoryPage.css";
 
-const API = "http://localhost:3001";
 
 export default function HistoryPage() {
   const [plans, setPlans] = useState([]);
@@ -183,7 +182,7 @@ export default function HistoryPage() {
 
   const fetchPlans = async () => {
     try {
-      const res = await fetch(`${API}/tripVersions`);
+      const res = await fetch(import.meta.env.VITE_HISTORY);
       const data = await res.json();
 
       // Chuẩn hóa dữ liệu để hiển thị
@@ -216,7 +215,7 @@ export default function HistoryPage() {
     if (!window.confirm("Are you sure you want to delete this plan?")) return;
 
     try {
-      const res = await fetch(`${API}/tripVersions/${id}`, { method: "DELETE" });
+      const res = await fetch(`${import.meta.env.VITE_HISTORY}${id}`, { method: "DELETE" });
       if (res.ok) {
         setPlans((prev) => prev.filter((plan) => plan.id !== id));
       }

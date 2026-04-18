@@ -129,7 +129,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/locations");
+        const res = await axios.get(import.meta.env.VITE_Location_Recommend);
         
         const topLocations = res.data
           .sort((a, b) => (b.rating || 0) - (a.rating || 0))

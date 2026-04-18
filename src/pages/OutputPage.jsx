@@ -17,7 +17,7 @@ export default function OutputPage() {
   useEffect(() => {
     const fetchPlan = async () => {
       try {
-        const res = await fetch(`${API}/tripVersions/${id}`);
+        const res = await fetch(`${import.meta.env.VITE_Old_Plan}${id}`);
         if (!res.ok) throw new Error("Not found");
 
         const data = await res.json();
