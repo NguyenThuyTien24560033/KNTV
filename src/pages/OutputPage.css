@@ -1,0 +1,120 @@
+/* CONTAINER */
+.output-container {
+  padding: 24px 40px;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.output-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.menu span {
+  margin-right: 24px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.menu span:hover {
+  text-decoration: underline;
+}
+
+/* SEARCH + AVATAR */
+.output-header div:nth-child(2) {
+  color: #888;
+}
+
+.output-header div:nth-child(3) {
+  font-size: 22px;
+}
+
+/* MAIN LAYOUT */
+.output-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+/* LEFT PANEL */
+.left {
+  background: #d9d9d9;
+  padding: 20px;
+  border-radius: 6px;
+  min-height: 400px;
+}
+
+/* DAY BLOCK */
+.day-block {
+  margin-bottom: 24px;
+}
+
+.day-block h3 {
+  margin-bottom: 10px;
+}
+
+.day-block ul {
+  margin: 5px 0 10px 20px;
+}
+
+/* RIGHT PANEL */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* BOX */
+.box {
+  background: #d9d9d9;
+  padding: 16px;
+  border-radius: 6px;
+}
+
+/* TITLE */
+.box h3 {
+  margin-bottom: 10px;
+}
+
+.box h4 {
+  margin-top: 10px;
+}
+
+/* LIST */
+.box ul {
+  margin-left: 18px;
+}
+
+/* INPUT SUMMARY BOX */
+.input-box {
+  position: relative;
+  min-height: 120px;
+}
+
+/* EDIT BUTTON */
+.edit-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  border: none;
+  background: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.edit-btn:hover {
+  background: #eee;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .output-main {
+    grid-template-columns: 1fr;
+  }
+}

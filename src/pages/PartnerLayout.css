@@ -1,0 +1,80 @@
+/* Container bao ngoài cùng */
+.partner-layout-container {
+  display: flex; /* Kích hoạt flexbox để chia cột */
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f8fafc;
+  overflow: hidden;
+}
+
+/* SIDEBAR (Cột trái - 1/4) */
+.partner-sidebar {
+  flex: 0 0 25%; /* Chiếm đúng 25% chiều rộng (1/4) */
+  max-width: 300px; /* Giới hạn độ rộng tối đa để không quá to trên màn hình lớn */
+  min-width: 240px; /* Đảm bảo đủ chỗ cho chữ */
+  background-color: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky; /* Giữ sidebar cố định khi cuộn content */
+  top: 0;
+  z-index: 50;
+}
+
+/* MAIN CONTENT (Cột phải - 3/4) */
+.partner-main-content {
+  flex: 1; /* Tự động chiếm phần còn lại (3/4) */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto; /* Cho phép cuộn nội dung bên phải độc lập */
+}
+
+/* Header bên trong content */
+.content-top-bar {
+  padding: 20px 40px;
+  background-color: white;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: center; /* Để tên nhà hàng ra giữa như trong ảnh của Tiên */
+}
+
+/* Vùng chứa các Item (Menu, Rating...) */
+.scrollable-content {
+  padding: 30px 40px;
+  flex: 1;
+}
+
+/* CSS cho các nút nav trong Sidebar */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 15px;
+  text-align: left;
+}
+
+.nav-item.active {
+  background-color: #eff6ff;
+  color: #2563eb;
+  border-right: 3px solid #2563eb;
+  font-weight: 600;
+}
+
+.nav-item:hover:not(.active) {
+  background-color: #f1f5f9;
+}
+
+/* Mobile Responsive: Nếu màn hình quá nhỏ thì thu sidebar lại */
+@media (max-width: 1024px) {
+  .partner-sidebar {
+    flex: 0 0 300px; /* Cố định độ rộng sidebar ở màn hình trung bình */
+  }
+}

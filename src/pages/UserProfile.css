@@ -1,0 +1,137 @@
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.profile-card {
+  background: #ddd;
+  padding: 30px 40px;
+  border-radius: 10px;
+  text-align: center;
+  width: 450px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-icon {
+  font-size: 100px;
+  color: #999;
+  margin-bottom: 10px;
+}
+
+.profile-info input {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.profile-info input:disabled {
+  background: #eee;
+  color: #333;
+}
+
+.registration-date {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.profile-buttons {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.profile-buttons button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  background: #0078ff;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.profile-buttons button:hover {
+  background: #005fcc;
+}
+
+.logout-btn {
+  background: #d9534f;
+}
+
+.logout-btn:hover {
+  background: #c9302c;
+}
+
+.modal-content{
+    background: #ddd; 
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px; 
+    text-align: center;
+}
+
+.modal-content h3{
+  margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+}
+
+.change-password-form{
+  display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.change-password-form input{
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background: #eee;
+    font-size: 15px;
+    text-align: center;
+}
+
+.change-password-form .save-btn{
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    background: #3bb83b;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.change-password-form .save-btn:hover{
+  background: #87f509;
+}
+
+.close-btn{
+  /* Nút Cancel/Đóng */
+    background: #de1717;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.close-btn:hover{
+  background: #f35454;
+}
