@@ -285,52 +285,6 @@
       ],
       "created_at": "2026-04-17T06:30:59.906Z",
       "status": "pending"
-    },
-    {
-      "title": "Trip to Vietnam",
-      "destination": "Vietnam",
-      "budget": 15,
-      "num_people": 4,
-      "departure_date": "2026-04-17",
-      "return_date": "2026-04-29",
-      "location": "",
-      "area_id": 1,
-      "travel_style": [
-        1
-      ],
-      "food_type": [
-        2
-      ],
-      "accommodation_type": [
-        3,
-        5
-      ],
-      "created_at": "2026-04-17T06:52:08.979Z",
-      "status": "pending",
-      "id": "ePgTBh7_3Ic"
-    },
-    {
-      "title": "Trip to Vietnam",
-      "destination": "Vietnam",
-      "budget": 16,
-      "num_people": 1,
-      "departure_date": "2026-04-18",
-      "return_date": "2026-04-22",
-      "location": "",
-      "area_id": 1,
-      "travel_style": [
-        4,
-        3
-      ],
-      "food_type": [
-        3
-      ],
-      "accommodation_type": [
-        5
-      ],
-      "created_at": "2026-04-17T07:17:40.856Z",
-      "status": "pending",
-      "id": "ON06bcrqCgQ"
     }
   ],
   "comments": [
