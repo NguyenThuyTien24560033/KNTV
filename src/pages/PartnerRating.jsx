@@ -581,16 +581,167 @@
 
 
 
+// import { useState } from "react";
+// import "./PartnerRating.css";
+
+// const API_BASE = "http://localhost:3001";
+
+// const PartnerRating = ({ data, onRefresh }) => {
+//   const [replyingTo, setReplyingTo] = useState(null);
+//   const [replyText, setReplyText] = useState("");
+//   const [submitting, setSubmitting] = useState(false);
+
+//   const reviews = data || [];
+
+//   // ⭐ TÍNH ĐIỂM TRUNG BÌNH
+//   const getAverageRating = () => {
+//     if (reviews.length === 0) return 0;
+//     const total = reviews.reduce((sum, r) => sum + (r.rating || 0), 0);
+//     return (total / reviews.length).toFixed(1);
+//   };
+
+//   // ⭐ RENDER NGÔI SAO
+//   const renderStars = (rating) => {
+//     const fullStars = Math.round(rating);
+//     return "★".repeat(fullStars) + "☆".repeat(5 - fullStars);
+//   };
+
+//   // ✅ GỬI PHẢN HỒI (PATCH vào chính comment đó)
+//   const handleReply = async (reviewId) => {
+//     if (!replyText.trim()) return;
+
+//     setSubmitting(true);
+//     try {
+//       const res = await fetch(`${API_BASE}/comments/${reviewId}`, {
+//         method: "PATCH",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({
+//           reply: replyText.trim()
+//         })
+//       });
+
+//       if (res.ok) {
+//         setReplyText("");
+//         setReplyingTo(null);
+//         await onRefresh(); // Gọi Layout fetch lại dữ liệu mới nhất
+//       } else {
+//         alert("Reply failed!");
+//       }
+//     } catch (err) {
+//       console.error(err);
+//       alert("Server error!");
+//     } finally {
+//       setSubmitting(false);
+//     }
+//   };
+
+//   return (
+//     <div className="rating-container">
+//       <h1>Customer Reviews</h1>
+
+//       {/* ⭐ SUMMARY CARD */}
+//       <div className="rating-summary">
+//         <div className="average-box">
+//           <h2>{getAverageRating()} / 5</h2>
+//           <p className="summary-stars">{renderStars(getAverageRating())}</p>
+//           <span>{reviews.length} reviews</span>
+//         </div>
+//       </div>
+
+//       {/* 📋 LIST REVIEWS */}
+//       <div className="review-list">
+//         {reviews.length === 0 ? (
+//           <div className="empty-reviews">
+//             <p>No reviews yet for your location.</p>
+//           </div>
+//         ) : (
+//           reviews.map((review) => (
+//             <div key={review.id} className="review-card">
+//               <div className="review-card-header">
+//                 <h4>{review.userName || "Anonymous"}</h4>
+//                 <span className="review-date">
+//                   {review.createdAt ? new Date(review.createdAt).toLocaleDateString() : ""}
+//                 </span>
+//               </div>
+
+//               <p className="stars-row">
+//                 {renderStars(review.rating || 0)}
+//               </p>
+
+//               <p className="comment-text">
+//                 {review.comment || review.content}
+//               </p>
+
+//               {/* 🟢 PHẦN REPLY */}
+//               <div className="reply-section">
+//                 {review.reply ? (
+//                   <div className="reply-box">
+//                     <strong>Your Response:</strong>
+//                     <p>{review.reply}</p>
+//                   </div>
+//                 ) : (
+//                   <>
+//                     {replyingTo === review.id ? (
+//                       <div className="reply-form">
+//                         <textarea
+//                           placeholder="Write a public reply..."
+//                           value={replyText}
+//                           onChange={(e) => setReplyText(e.target.value)}
+//                           rows={3}
+//                         />
+//                         <div className="reply-form-btns">
+//                           <button
+//                             className="send-btn"
+//                             onClick={() => handleReply(review.id)}
+//                             disabled={submitting || !replyText.trim()}
+//                           >
+//                             {submitting ? "Sending..." : "Send Reply"}
+//                           </button>
+//                           <button 
+//                             className="cancel-btn" 
+//                             onClick={() => {
+//                               setReplyingTo(null);
+//                               setReplyText("");
+//                             }}
+//                           >
+//                             Cancel
+//                           </button>
+//                         </div>
+//                       </div>
+//                     ) : (
+//                       <button
+//                         className="reply-open-btn"
+//                         onClick={() => setReplyingTo(review.id)}
+//                       >
+//                         Reply to this review
+//                       </button>
+//                     )}
+//                   </>
+//                 )}
+//               </div>
+//             </div>
+//           ))
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default PartnerRating;
+
+
 import { useState } from "react";
 import "./PartnerRating.css";
 
-const API_BASE = "http://localhost:3001";
+// 1. Sử dụng đúng biến env bạn đã khai báo cho comments
+const API_URL = import.meta.env.VITE_Location_Comment;
 
 const PartnerRating = ({ data, onRefresh }) => {
   const [replyingTo, setReplyingTo] = useState(null);
   const [replyText, setReplyText] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
+  // Lấy danh sách reviews từ prop data (Layout truyền xuống)
   const reviews = data || [];
 
   // ⭐ TÍNH ĐIỂM TRUNG BÌNH
@@ -600,36 +751,39 @@ const PartnerRating = ({ data, onRefresh }) => {
     return (total / reviews.length).toFixed(1);
   };
 
-  // ⭐ RENDER NGÔI SAO
+  // ⭐ RENDER NGÔI SAO (Sử dụng ký tự đặc biệt cho nhẹ máy)
   const renderStars = (rating) => {
     const fullStars = Math.round(rating);
     return "★".repeat(fullStars) + "☆".repeat(5 - fullStars);
   };
 
-  // ✅ GỬI PHẢN HỒI (PATCH vào chính comment đó)
+  // ✅ GỬI PHẢN HỒI (PATCH trực tiếp vào comment dựa trên ID)
   const handleReply = async (reviewId) => {
     if (!replyText.trim()) return;
 
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_BASE}/comments/${reviewId}`, {
+      // API_URL đã có sẵn dấu / ở cuối theo .env của bạn (http://localhost:3001/comments/)
+      const res = await fetch(`${API_URL}${reviewId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          reply: replyText.trim()
+          reply: replyText.trim(),
+          repliedAt: new Date().toISOString()
         })
       });
 
       if (res.ok) {
         setReplyText("");
         setReplyingTo(null);
-        await onRefresh(); // Gọi Layout fetch lại dữ liệu mới nhất
+        // Gọi hàm Refresh từ PartnerLayout để cập nhật lại UI ngay lập tức
+        await onRefresh(); 
       } else {
-        alert("Reply failed!");
+        alert("Gửi phản hồi thất bại!");
       }
     } catch (err) {
-      console.error(err);
-      alert("Server error!");
+      console.error("Error replying to comment:", err);
+      alert("Lỗi kết nối server!");
     } finally {
       setSubmitting(false);
     }
@@ -637,54 +791,63 @@ const PartnerRating = ({ data, onRefresh }) => {
 
   return (
     <div className="rating-container">
-      <h1>Customer Reviews</h1>
+      <div className="rating-header-section">
+        <h1>Customer Reviews</h1>
+        <p>Quản lý các đánh giá và phản hồi khách hàng.</p>
+      </div>
 
-      {/* ⭐ SUMMARY CARD */}
+      {/* ⭐ TỔNG QUAN ĐÁNH GIÁ */}
       <div className="rating-summary">
         <div className="average-box">
-          <h2>{getAverageRating()} / 5</h2>
-          <p className="summary-stars">{renderStars(getAverageRating())}</p>
-          <span>{reviews.length} reviews</span>
+          <div className="big-rating">{getAverageRating()}</div>
+          <div className="summary-stars">{renderStars(getAverageRating())}</div>
+          <div className="total-reviews">{reviews.length} đánh giá</div>
         </div>
       </div>
 
-      {/* 📋 LIST REVIEWS */}
+      {/* 📋 DANH SÁCH REVIEW */}
       <div className="review-list">
         {reviews.length === 0 ? (
           <div className="empty-reviews">
-            <p>No reviews yet for your location.</p>
+            <p>Chưa có đánh giá nào được gửi đến địa điểm này.</p>
           </div>
         ) : (
           reviews.map((review) => (
             <div key={review.id} className="review-card">
               <div className="review-card-header">
-                <h4>{review.userName || "Anonymous"}</h4>
-                <span className="review-date">
-                  {review.createdAt ? new Date(review.createdAt).toLocaleDateString() : ""}
-                </span>
+                <div className="user-info">
+                  <div className="avatar-circle">
+                    {review.userName?.charAt(0).toUpperCase() || "A"}
+                  </div>
+                  <div>
+                    <h4>{review.userName || "Khách hàng"}</h4>
+                    <span className="review-date">
+                      {review.createdAt ? new Date(review.createdAt).toLocaleDateString("vi-VN") : "Gần đây"}
+                    </span>
+                  </div>
+                </div>
+                <div className="stars-row">
+                  {renderStars(review.rating || 0)}
+                </div>
               </div>
-
-              <p className="stars-row">
-                {renderStars(review.rating || 0)}
-              </p>
 
               <p className="comment-text">
                 {review.comment || review.content}
               </p>
 
-              {/* 🟢 PHẦN REPLY */}
+              {/* 🟢 PHẦN PHẢN HỒI */}
               <div className="reply-section">
                 {review.reply ? (
                   <div className="reply-box">
-                    <strong>Your Response:</strong>
+                    <div className="reply-label">Phản hồi của bạn:</div>
                     <p>{review.reply}</p>
                   </div>
                 ) : (
-                  <>
+                  <div className="reply-action-area">
                     {replyingTo === review.id ? (
                       <div className="reply-form">
                         <textarea
-                          placeholder="Write a public reply..."
+                          placeholder="Viết phản hồi công khai..."
                           value={replyText}
                           onChange={(e) => setReplyText(e.target.value)}
                           rows={3}
@@ -695,7 +858,7 @@ const PartnerRating = ({ data, onRefresh }) => {
                             onClick={() => handleReply(review.id)}
                             disabled={submitting || !replyText.trim()}
                           >
-                            {submitting ? "Sending..." : "Send Reply"}
+                            {submitting ? "Đang gửi..." : "Gửi phản hồi"}
                           </button>
                           <button 
                             className="cancel-btn" 
@@ -704,7 +867,7 @@ const PartnerRating = ({ data, onRefresh }) => {
                               setReplyText("");
                             }}
                           >
-                            Cancel
+                            Hủy
                           </button>
                         </div>
                       </div>
@@ -713,10 +876,10 @@ const PartnerRating = ({ data, onRefresh }) => {
                         className="reply-open-btn"
                         onClick={() => setReplyingTo(review.id)}
                       >
-                        Reply to this review
+                        Trả lời khách hàng
                       </button>
                     )}
-                  </>
+                  </div>
                 )}
               </div>
             </div>

@@ -1,217 +1,5 @@
 
 
-// import { useState, useEffect } from "react";
-// import { 
-//   LayoutDashboard, 
-//   UtensilsCrossed, 
-//   Clock, 
-//   Tag, 
-//   Bell, 
-//   Star, 
-//   LogOut, 
-//   Menu as MenuIcon,
-//   X 
-// } from "lucide-react";
-// import { useNavigate } from "react-router-dom";
-
-// // Import các Block Items
-// import PartnerDiscount from "./PartnerDiscount.jsx";
-// import PartnerFirst from "./PartnerFirst.jsx";
-// import PartnerHours from "./PartnerHour.jsx";
-// import PartnerMenu from "./PartnerMenu";
-// import PartnerRating from "./PartnerRating.jsx";
-// import PartnerNoti from "./PartnerNoti.jsx";
-// import "./PartnerLayout.css";
-
-// const API_BASE = "http://localhost:3001";
-
-// const PartnerLayout = () => {
-//   const navigate = useNavigate();
-  
-//   // 1. STATE QUẢN LÝ TAB & UI
-//   const [activeTab, setActiveTab] = useState("dashboard");
-//   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  
-//   // 2. STATE DỮ LIỆU TẬP TRUNG
-//   const [fullData, setFullData] = useState({
-//     locations: [],
-//     menu: [],
-//     discounts: [],
-//     hours_record: null,
-//     notifications: [],
-//     reviews: []
-//   });
-//   const [loading, setLoading] = useState(true);
-
-//   // 3. HÀM FETCH DỮ LIỆU (Gọi 1 lần dùng cho tất cả)
-//   const fetchAllPartnerData = async () => {
-//     try {
-//       const user = JSON.parse(localStorage.getItem("user"));
-//       if (!user) {
-//         navigate("/partner/login");
-//         return;
-//       }
-//       const partnerId = String(user.id);
-
-//       // Bước 1: Lấy thông tin quán (Location)
-//       const locRes = await fetch(`${API_BASE}/locations?partnerId=${partnerId}`);
-//       const locations = await locRes.json();
-      
-//       if (locations.length > 0) {
-//         const pId = locations[0].id;
-
-//         // Bước 2: Fetch song song tất cả tài nguyên bằng Promise.all
-//         const [menuRes, discRes, hourRes, notiRes, reviewRes] = await Promise.all([
-//           fetch(`${API_BASE}/menu?placeId=${pId}`),
-//           fetch(`${API_BASE}/discounts?placeId=${pId}`),
-//           fetch(`${API_BASE}/hours?placeId=${pId}`),
-//           fetch(`${API_BASE}/notifications`),
-//           fetch(`${API_BASE}/comments?placeId=${pId}`)
-//         ]);
-
-//         const menu = await menuRes.json();
-//         const discounts = await discRes.json();
-//         const hoursData = await hourRes.json();
-//         const allNoti = await notiRes.json();
-//         const reviews = await reviewRes.json();
-
-//         // Bước 3: Lọc thông báo theo Partner
-//         const filteredNoti = allNoti
-//           .filter((n) => String(n.partnerId) === partnerId)
-//           .sort((a, b) => b.id - a.id);
-
-//         setFullData({
-//           locations,
-//           menu,
-//           discounts,
-//           hours_record: hoursData.length > 0 ? hoursData[0] : null,
-//           notifications: filteredNoti,
-//           reviews: reviews.sort((a, b) => b.id - a.id)
-//         });
-//       }
-//     } catch (error) {
-//       console.error("Layout Fetching Error:", error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchAllPartnerData();
-//   }, []);
-
-//   const handleLogout = () => {
-//     localStorage.removeItem("user");
-//     navigate("/");
-//   };
-
-//   if (loading) return <div className="layout-loading">Loading system data...</div>;
-
-//   // Cấu hình Sidebar
-//   const sidebarItems = [
-//     { id: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={20} /> },
-//     { id: "menu", label: "Menu Management", icon: <UtensilsCrossed size={20} /> },
-//     { id: "hours", label: "Operating Hours", icon: <Clock size={20} /> },
-//     { id: "discount", label: "Promotions", icon: <Tag size={20} /> },
-//     { id: "notification", label: "Announcements", icon: <Bell size={20} /> },
-//     { id: "rating", label: "Customer Reviews", icon: <Star size={20} /> },
-//   ];
-
-//   return (
-//     <div className="partner-layout-container">
-//       {/* SIDEBAR AREA */}
-//       <aside className={`partner-sidebar ${isSidebarOpen ? "open" : "closed"}`}>
-//         <div className="sidebar-header">
-//           <div className="logo-brand">PARTNER HUB</div>
-//           <button className="mobile-toggle" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-//             {isSidebarOpen ? <X size={18} /> : <MenuIcon size={18} />}
-//           </button>
-//         </div>
-
-//         <nav className="sidebar-nav">
-//           {sidebarItems.map((item) => (
-//             <button
-//               key={item.id}
-//               className={`nav-item ${activeTab === item.id ? "active" : ""}`}
-//               onClick={() => setActiveTab(item.id)}
-//             >
-//               {item.icon}
-//               <span>{item.label}</span>
-//             </button>
-//           ))}
-//         </nav>
-
-//         <div className="sidebar-footer">
-//           <button className="logout-btn" onClick={handleLogout}>
-//             <LogOut size={18} />
-//             <span>Logout</span>
-//           </button>
-//         </div>
-//       </aside>
-
-//       {/* CONTENT AREA */}
-//       <main className="partner-main-content">
-//         <header className="content-top-bar">
-//           <div className="header-info">
-//             <h2>{fullData.locations[0]?.name || "Partner Name"}</h2>
-//             <p>{fullData.locations[0]?.address}</p>
-//           </div>
-//         </header>
-
-//         <div className="scrollable-content">
-//           {/* LOGIC: CHỈ RENDER 1 ITEM DUY NHẤT KHỚP VỚI ACTIVETAB */}
-          
-//           {activeTab === "dashboard" && (
-//             <PartnerFirst data={fullData} onSwitchTab={(id) => setActiveTab(id)} />
-//           )}
-
-//           {activeTab === "menu" && (
-//             <PartnerMenu 
-//               data={fullData.menu} 
-//               placeId={fullData.locations[0]?.id} 
-//               onRefresh={fetchAllPartnerData} 
-//             />
-//           )}
-
-//           {activeTab === "hours" && (
-//             <PartnerHours 
-//               data={fullData.hours_record} 
-//               placeId={fullData.locations[0]?.id} 
-//               onRefresh={fetchAllPartnerData} 
-//             />
-//           )}
-
-//           {activeTab === "discount" && (
-//             <PartnerDiscount 
-//               data={fullData.discounts} 
-//               placeId={fullData.locations[0]?.id} 
-//               onRefresh={fetchAllPartnerData} 
-//             />
-//           )}
-
-//           {activeTab === "notification" && (
-//             <PartnerNoti 
-//               data={fullData.notifications} 
-//               onRefresh={fetchAllPartnerData} 
-//             />
-//           )}
-
-//           {activeTab === "rating" && (
-//             <PartnerRating 
-//               data={fullData.reviews} 
-//               onRefresh={fetchAllPartnerData} 
-//             />
-//           )}
-//         </div>
-//       </main>
-//     </div>
-//   );
-// };
-
-// export default PartnerLayout;
-
-
-
 import { useState, useEffect } from "react";
 import { 
   LayoutDashboard, 
@@ -223,11 +11,11 @@ import {
   LogOut, 
   Menu as MenuIcon,
   X,
-  User // Thêm icon User từ lucide-react
+  User 
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-// Import các Block Items
+
 import PartnerDiscount from "./PartnerDiscount.jsx";
 import PartnerFirst from "./PartnerFirst.jsx";
 import PartnerHours from "./PartnerHour.jsx";
@@ -237,14 +25,14 @@ import PartnerNoti from "./PartnerNoti.jsx";
 import PartnerProfile from "./PartnerProfile.jsx"; // 1. Import PartnerProfile
 import "./PartnerLayout.css";
 
-const API_BASE = "http://localhost:3001";
-
 const PartnerLayout = () => {
   const navigate = useNavigate();
   
+  // 1. STATE QUẢN LÝ UI
   const [activeTab, setActiveTab] = useState("dashboard");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   
+  // 2. STATE DỮ LIỆU TẬP TRUNG
   const [fullData, setFullData] = useState({
     locations: [],
     menu: [],
@@ -255,6 +43,7 @@ const PartnerLayout = () => {
   });
   const [loading, setLoading] = useState(true);
 
+  // 3. HÀM FETCH DỮ LIỆU TỐI ƯU (CHỈ GỌI 1 LẦN DUY NHẤT)
   const fetchAllPartnerData = async () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
@@ -264,37 +53,29 @@ const PartnerLayout = () => {
       }
       const partnerId = String(user.id);
 
-      const locRes = await fetch(`${API_BASE}/locations?partnerId=${partnerId}`);
-      const locations = await locRes.json();
+      // SỬ DỤNG BIẾN MÔI TRƯỜNG TỪ .ENV
+      // Vì dữ liệu lồng nhau, ta chỉ cần gọi đến endpoint Location
+      const res = await fetch(`${import.meta.env.VITE_Location}?partnerId=${partnerId}`);
       
-      if (locations.length > 0) {
-        const pId = locations[0].id;
+      if (!res.ok) {
+        console.error("Lỗi phản hồi từ Backend:", res.status);
+        return;
+      }
 
-        const [menuRes, discRes, hourRes, notiRes, reviewRes] = await Promise.all([
-          fetch(`${API_BASE}/menu?placeId=${pId}`),
-          fetch(`${API_BASE}/discounts?placeId=${pId}`),
-          fetch(`${API_BASE}/hours?placeId=${pId}`),
-          fetch(`${API_BASE}/notifications`),
-          fetch(`${API_BASE}/comments?placeId=${pId}`)
-        ]);
+      const data = await res.json();
+      
+      // Kiểm tra nếu có dữ liệu trả về (thường là mảng khi dùng filter)
+      if (Array.isArray(data) && data.length > 0) {
+        const target = data[0]; // Cục dữ liệu tổng lồng nhau
 
-        const menu = await menuRes.json();
-        const discounts = await discRes.json();
-        const hoursData = await hourRes.json();
-        const allNoti = await notiRes.json();
-        const reviews = await reviewRes.json();
-
-        const filteredNoti = allNoti
-          .filter((n) => String(n.partnerId) === partnerId)
-          .sort((a, b) => b.id - a.id);
-
+        // "Mổ xẻ" dữ liệu lồng nhau và đưa vào state tập trung
         setFullData({
-          locations,
-          menu,
-          discounts,
-          hours_record: hoursData.length > 0 ? hoursData[0] : null,
-          notifications: filteredNoti,
-          reviews: reviews.sort((a, b) => b.id - a.id)
+          locations: [target], 
+          menu: target.menu || [],
+          discounts: target.discounts || [],
+          hours_record: target.hours || null,
+          notifications: target.notifications || [],
+          reviews: (target.comments || []).sort((a, b) => b.id - a.id)
         });
       }
     } catch (error) {
@@ -303,10 +84,54 @@ const PartnerLayout = () => {
       setLoading(false);
     }
   };
+// const fetchAllPartnerData = async () => {
+//     try {
+//       const user = JSON.parse(localStorage.getItem("user"));
+//       console.log("1. Check User LocalStorage:", user); // Kiểm tra user có tồn tại không
 
+//       if (!user) {
+//         navigate("/partner/login");
+//         return;
+//       }
+//       const partnerId = String(user.id);
+//       const apiUrl = `${import.meta.env.VITE_Location}?partnerId=${partnerId}`;
+//       console.log("2. Fetching URL:", apiUrl); // Kiểm tra URL có bị lỗi // hay thiếu / không
+
+//       const res = await fetch(apiUrl);
+//       if (!res.ok) {
+//         console.error("3. API Response Error:", res.status, res.statusText);
+//         return;
+//       }
+
+//       const data = await res.json();
+//       console.log("4. Raw Data from API:", data); // QUAN TRỌNG: Xem cấu trúc thực tế của target
+
+//       if (Array.isArray(data) && data.length > 0) {
+//         const target = data[0];
+//         console.log("5. Target Location Object:", target); // Kiểm tra các key menu, discounts có tồn tại không
+
+//         setFullData({
+//           locations: [target], 
+//           menu: target.menu || [],
+//           discounts: target.discounts || [],
+//           hours_record: target.hours || null,
+//           notifications: target.notifications || [],
+//           reviews: (target.comments || []).sort((a, b) => b.id - a.id)
+//         });
+//       } else {
+//         console.warn("6. No data found for partnerId:", partnerId);
+//       }
+//     } catch (error) {
+//       console.error("7. Catch Block Error:", error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
   useEffect(() => {
     fetchAllPartnerData();
   }, []);
+
+
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -315,7 +140,7 @@ const PartnerLayout = () => {
 
   if (loading) return <div className="layout-loading">Loading system data...</div>;
 
-  // 2. Thêm mục Profile vào sidebarItems
+  // Cấu hình Sidebar
   const sidebarItems = [
     { id: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={20} /> },
     { id: "menu", label: "Menu Management", icon: <UtensilsCrossed size={20} /> },
@@ -323,11 +148,12 @@ const PartnerLayout = () => {
     { id: "discount", label: "Promotions", icon: <Tag size={20} /> },
     { id: "notification", label: "Announcements", icon: <Bell size={20} /> },
     { id: "rating", label: "Customer Reviews", icon: <Star size={20} /> },
-    { id: "profile", label: "Profile", icon: <User size={20} /> }, // Thêm ở đây
+    { id: "profile", label: "Profile", icon: <User size={20} /> },
   ];
 
   return (
     <div className="partner-layout-container">
+      {/* SIDEBAR AREA */}
       <aside className={`partner-sidebar ${isSidebarOpen ? "open" : "closed"}`}>
         <div className="sidebar-header">
           <div className="logo-brand">PARTNER HUB</div>
@@ -357,6 +183,7 @@ const PartnerLayout = () => {
         </div>
       </aside>
 
+      {/* CONTENT AREA */}
       <main className="partner-main-content">
         <header className="content-top-bar">
           <div className="header-info">
@@ -366,6 +193,8 @@ const PartnerLayout = () => {
         </header>
 
         <div className="scrollable-content">
+          {/* PHÂN PHÁT DỮ LIỆU CHO CÁC COMPONENT CON (KHÔNG FETCH LẠI) */}
+          
           {activeTab === "dashboard" && (
             <PartnerFirst data={fullData} onSwitchTab={(id) => setActiveTab(id)} />
           )}
@@ -394,12 +223,22 @@ const PartnerLayout = () => {
             />
           )}
 
-          {activeTab === "notification" && (
+          {/* {activeTab === "notification" && (
             <PartnerNoti 
               data={fullData.notifications} 
               onRefresh={fetchAllPartnerData} 
             />
-          )}
+          )} */}
+          {/* SỬA ĐOẠN NÀY TRONG PartnerLayout.jsx */}
+
+{activeTab === "notification" && (
+  <PartnerNoti 
+    data={fullData.notifications} 
+    // THÊM DÒNG DƯỚI ĐÂY VÀO
+    placeId={fullData.locations[0]?.id} 
+    onRefresh={fetchAllPartnerData} 
+  />
+)}
 
           {activeTab === "rating" && (
             <PartnerRating 
@@ -408,7 +247,6 @@ const PartnerLayout = () => {
             />
           )}
 
-          {/* 3. LOGIC RENDER PROFILE */}
           {activeTab === "profile" && (
             <PartnerProfile />
           )}
@@ -419,3 +257,4 @@ const PartnerLayout = () => {
 };
 
 export default PartnerLayout;
+
